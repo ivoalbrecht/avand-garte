@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>BoredLameRecommender</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet" />
+	<link href="static/CSS/templatemo-style.css" rel="stylesheet" />
+</head>
+
+<body> 
+
+	<div class="container">
+	<!-- Top box -->
+		<!-- Logo & Site Name -->
+		<div class="placeholder">
+			<div class="parallax-window" data-parallax="scroll" data-image-src="static/img/pawns.jpg">
+				<div class="tm-header">
+					<div class="row tm-header-inner">
+						<div class="col-md-6 col-12">
+							<img src="static/img/simple-house-logo.png" alt="Logo" class="tm-site-logo" /> 
+							<div class="tm-site-text-box">
+								<h1 class="tm-site-title">BoredLameRecommender</h1>
+<!-- 								<h6 class="tm-site-description">new restaurant template</h6>	
+ -->							</div>
+						</div>
+						<nav class="col-md-6 col-12 tm-nav">
+							<ul class="tm-nav-ul">
+							<li class="tm-nav-li"><a href="\index" class="tm-nav-link active">Home</a></li>
+								<!-- <li class="tm-nav-li"><a href="about.html" class="tm-nav-link">About</a></li>
+								<li class="tm-nav-li"><a href="contact.html" class="tm-nav-link">Contact</a></li> -->
+							</ul>
+						</nav>	
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<main>
+			<header class="row tm-welcome-section">
+				<h2 class="col-12 text-center tm-section-title">Your board game recommendations:</h2>
+				<!-- <p class="col-12 text-center">This is about page of simple house template. 
+                You can modify and use this HTML template for your website. Total 3 HTML pages included in this template. Header image has a parallax effect.</p> -->
+			</header>
+
+			<div class="tm-container-inner tm-persons">
+				<div class="row">
+
+                    {% for game in results_html%}
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<img src= {{ game[1] }} alt="Image" class="img-fluid tm-gallery-img" />
+								<figcaption>
+									<h4 class="tm-gallery-title" align="center">{{ game[0] }} </h4>
+								</figcaption>
+							</figure>
+                        </article>
+                        
+						{% endfor %}
+				</div>
+			</div>
+			<div class="tm-container-inner tm-featured-image">
+				<div class="row">
+					<div class="col-12">
+						<div class="placeholder-2">
+							<div class="parallax-window-2" data-parallax="scroll" data-image-src="static/img/ticket_to_ride.jpg"></div>		
+						</div>
+					</div>
+				</div>
+            </div>
+            
+			<div class="tm-container-inner tm-features">
+				<div class="row">
+					<div class="col-lg-4">
+						<div class="tm-feature">
+							<i class="fas fa-4x fa-pepper-hot tm-feature-icon"></i>
+							<p class="tm-feature-description">Something about Ivo</p>
+							<a href="/index" class="tm-btn tm-btn-primary">Ivo Albrecht</a>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="tm-feature">
+							<i class="fas fa-4x fa-seedling tm-feature-icon"></i>
+							<p class="tm-feature-description">Something about Chris</p>
+							<a href="/index" class="tm-btn tm-btn-success">Christoph Lenk</a>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="tm-feature">
+							<i class="fas fa-4x fa-cocktail tm-feature-icon"></i>
+							<p class="tm-feature-description">Something about Hannes</p>
+							<a href="/index" class="tm-btn tm-btn-danger">Hannes Muellner</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="tm-container-inner tm-history">
+				<div class="row">
+					<div class="col-12">
+						<div class="tm-history-inner">
+							<img src="static/img/stochastic_sage_logo.png" alt="Image" class="img-fluid tm-history-img" />
+							<div class="tm-history-text"> 
+								<h4 class="tm-history-title">About this project</h4>
+								<p class="tm-mb-p">Sed ligula risus, interdum aliquet imperdiet sit amet, auctor sit amet justo. Maecenas posuere lorem id augue interdum vehicula. Praesent sed leo eget libero ultricies congue.</p>
+							</div>
+						</div>	
+					</div>
+				</div>
+			</div>
+		</main>
+
+		<footer class="tm-footer text-center">
+			<p>Copyright </p>
+		</footer>
+	</div>
+	<script src="static/JS/jquery.min.js"></script>
+	<script src="static/JS/parallax.min.js"></script>
+</body>
+</html>

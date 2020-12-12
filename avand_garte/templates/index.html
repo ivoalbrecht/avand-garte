@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>BoredLameRecommender	</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet" />    
+	<link href="static/CSS/templatemo-style.css" rel="stylesheet" />
+</head>
+<!--
+
+
+-->
+<body> 
+
+	<div class="container">
+	<!-- Top box -->
+		<!-- Logo & Site Name -->
+		<div class="placeholder">
+			<div class="parallax-window" data-parallax="scroll" data-image-src="static/img/pawns.jpg">
+				<div class="tm-header">
+					<div class="row tm-header-inner">
+						<div class="col-md-6 col-12">
+							<img src="static/img/simple-house-logo.png" alt="Logo" class="tm-site-logo" /> 
+							<div class="tm-site-text-box">
+								<h1 class="tm-site-title">BoredLameRecommender</h1>
+<!-- 								<h6 class="tm-site-description">new restaurant template</h6>	
+ -->							</div>
+						</div>
+						<nav class="col-md-6 col-12 tm-nav">
+							<ul class="tm-nav-ul">
+<!-- 								<li class="tm-nav-li"><a href="index.html" class="tm-nav-link active">Home</a></li>
+								<li class="tm-nav-li"><a href="about.html" class="tm-nav-link">About</a></li>
+								<li class="tm-nav-li"><a href="contact.html" class="tm-nav-link">Contact</a></li> -->
+							</ul>
+						</nav>	
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<main>
+			<header class="row tm-welcome-section">
+				<h2 class="col-12 text-center tm-section-title">Welcome to our 
+					<br>Board Game Recommender</h2>
+				<p class="col-12 text-center">Please rate the board games below from 1 to 5 to get recommendations.
+					<br>In case you haven't played them all, don't worry.
+					<br>If you haven't played any of them, you shouldn't be here.</p>
+			</header>
+			
+<!-- 			<div class="tm-paging-links">
+				<nav>
+					<ul>
+						<li class="tm-paging-item"><a href="#" class="tm-paging-link active">Pizza</a></li>
+						<li class="tm-paging-item"><a href="#" class="tm-paging-link">Salad</a></li>
+						<li class="tm-paging-item"><a href="#" class="tm-paging-link">Noodle</a></li>
+					</ul>
+				</nav>
+			</div>
+ -->
+			<!-- Gallery -->
+			<div class="row tm-gallery">
+				<!-- gallery page 1 -->
+				<div id="tm-gallery-page-pizza" class="tm-gallery-page">
+
+					<form class="form" action="/recommend">
+						
+						{% for game in games_html%}
+
+						<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+							<figure>
+								<img src= {{ game[1] }} alt="Image" class="img-fluid tm-gallery-img" />
+								<figcaption>
+									<h4 class="tm-gallery-title" align="center">{{ game[0] }} </h4>
+									<select class="select-css" vertical-align=center name="{{ game[0] }}"  >
+										<option selected>Rate the game...</option>
+										  <option value="not played">Have not played it</option>
+										  <option value="1">1</option>
+										  <option value="2">2</option>
+										  <option value="3">3</option>
+										  <option value="4">4</option>
+										  <option value="5">5</option>
+									</select>
+								</figcaption>
+
+							</figure>
+						</article>
+						{% endfor %}
+						<br>
+						<br>
+						<input type="submit" class="select-css" onclick="this.value='Calculating...'" value="Recommend!" id="button1" background-image=None>
+						<!-- <input type="submit" , align="center"> -->
+					</form>
+					
+				
+				</div> <!-- gallery page 1 -->
+			</div>
+			<!-- <div class="tm-section tm-container-inner">
+				<div class="row">
+					<div class="col-md-6">
+						<figure class="tm-description-figure">
+							<img src="static/img/img-01.jpg" alt="Image" class="img-fluid" />
+						</figure>
+					</div>
+					<div class="col-md-6">
+						<div class="tm-description-box"> 
+							<h4 class="tm-gallery-title">Maecenas nulla neque</h4>
+							<p class="tm-mb-45">Redistributing this template as a downloadable ZIP file on any template collection site is strictly prohibited. You will need to <a rel="nofollow" href="https://templatemo.com/contact">talk to us</a> for additional permissions about our templates. Thank you.</p>
+							<a href="about.html" class="tm-btn tm-btn-default tm-right">Read More</a>
+						</div>
+					</div>
+				</div>
+			</div> -->
+		</main>
+
+		<footer class="tm-footer text-center">
+<!-- 			<p>Copyright &copy; 2020 Simple House 
+            
+            | Design: <a rel="nofollow" href="https://templatemo.com">TemplateMo</a></p> -->
+		</footer>
+	</div>
+	<script src="static/JS/jquery.min.js"></script>
+	<script src="static/JS/parallax.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			// Handle click on paging links
+			$('.tm-paging-link').click(function(e){
+				e.preventDefault();
+				
+				var page = $(this).text().toLowerCase();
+				$('.tm-gallery-page').addClass('hidden');
+				$('#tm-gallery-page-' + page).removeClass('hidden');
+				$('.tm-paging-link').removeClass('active');
+				$(this).addClass("active");
+			});
+		});
+	</script>
+</body>
+</html>
