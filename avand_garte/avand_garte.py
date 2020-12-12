@@ -3,9 +3,7 @@
 """Main module."""
 
 from flask import Flask, render_template, request
-import ml_models
 import pandas as pd
-from data_import import get_games, get_images_from_game_list
 
 app = Flask(__name__)
 
@@ -14,8 +12,6 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     
-    
-
     return render_template("index.html",)
 
 # @app.route("/recommend")
