@@ -2,32 +2,39 @@
 
 """Main module."""
 
-from flask import Flask, render_template, request
-import pandas as pd
+import os
+from flask import Flask, flash, request, redirect, url_for
+from werkzeug.utils import secure_filename
+
+UPLOAD_FOLDER = '/Users/ivoalbrecht/projects/avand_garte/avand_garte/avand_garte/uploads'
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@app.route("/index")
-@app.route("/")
-def index():
-    
-    return render_template("index.html",)
-
-# @app.route("/recommend")
-# def recommend():
-
-#     user_input = dict(request.args)
-    
-#     if MODEL == "NMF":
-#         game_list = ml_models.nmf_recommender(user_input, NUMBER_OF_RECOM)
-#     if MODEL == "CoSim":
-#         game_list = ml_models.cosim_recommender(user_input, NUMBER_OF_RECOM)
-
-#     image_list = get_images_from_game_list(game_list)
-
-#     return render_template("recommendations.html", results_html = zip(game_list, image_list))
-
+@app.route('/', methods=['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        # if user does not select file, browser also
+        # submit an empty part without filename
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect(url_for('uploaded_file',
+                                    filename=filename))
+    return render_template('index.html')
 
 if __name__ == "__main__":
 
