@@ -26,7 +26,7 @@ def predict_genre(file, num_pred: int):
     model = keras.models.load_model(model_path)
     model.summary()
 
-    pic = keras.preprocessing.image.load_img(picture_path, target_size=(244,244))
+    pic = keras.preprocessing.image.load_img(file, target_size=(244,244))
     numpy_image = keras.preprocessing.image.img_to_array(pic)
     image_batch = np.expand_dims(numpy_image, axis=0)
     processed_image = keras.applications.mobilenet_v2.preprocess_input(image_batch)
@@ -35,5 +35,3 @@ def predict_genre(file, num_pred: int):
     results_dict = match_genre(prediction_list)
     sort_results = sorted(results_dict.items(), key=lambda x: x[1], reverse=True)
     return sort_results[:num_pred]
-
-print(predict_genre(3,3))
