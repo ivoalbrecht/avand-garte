@@ -12,7 +12,7 @@ body {
 }
 
 body,button,.form-control {
-	color: #606368;
+	color: #26272c;
 	font-family: 'Open Sans', Helvetica, Arial, sans-serif; 
 	font-weight: 400;	
 }
@@ -57,8 +57,8 @@ p {
 }
 
 .tm-site-title { 
-	border: 2px solid #888481;
-	color: #676362;
+	border: 2px solid #26272c;;
+	color: #26272c;
 	display: inline-block;
 	font-size: 3rem; 
 	padding: 30px 40px;
@@ -75,7 +75,7 @@ p {
 
 .tm-white-bg {
 	background-color: white;
-	color: #676362;
+	color: #26272c;
 }
 
 .tm-translucent-white-bg { background-color: rgba(255,255,255,0.72); }
@@ -270,3 +270,13 @@ p {
 .avatar-pic {
 	width: 150px;
 	}
+
+.grid-container {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 0.5fr;
+	gap: 0px 0px;
+	grid-template-areas:
+		".";
+	}
+	  

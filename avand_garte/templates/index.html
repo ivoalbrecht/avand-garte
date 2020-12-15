@@ -71,21 +71,14 @@
             <section class="parallax-window tm-section tm-section-gallery tm-flex" id="results" data-parallax="scroll" data-image-src="static/img/6364.jpg">
                 <div class="tm-page-content-width tm-flex-col tm-gallery-content">
                     <div class="tm-content-box-inner">
-                                                
+                        <a href="#results">
+                        </a>
                         <h2 class="tm-section-title">Your artwork has been classified as:</h2>
-
-                            <div class="iso-box-section">
-                                <div class="iso-box-wrapper col4-iso-box">
-                                    {% for tuple in prediction_html %}
-                                    
-                                    <p>{{ tuple[0] }}: {{ tuple[1] }} %</p>
-                                    <button class="tm-btn" style="height:30px;width:{{ tuple[1] }}%" float="left"></button>
-                                    
-                                
-                                    {% endfor %}
-                                </div>                             
-                            </div>
-
+                        {% for tuple in prediction_html %}    
+                        <div class="row">                 
+                            <p><button class="tm-btn" style="height:30px;width:{{ tuple[1] }}%" float="left">{{ tuple[0] }}:{{ tuple[1] }} %</button></p>
+                        </div> 
+                        {% endfor %}
                     </div>
                 </div>                
             </section>
@@ -98,7 +91,7 @@
                             This project has been conducted by Ivo Albrecht. 
                             <a href="https://www.linkedin.com/in/ivo-albrecht-b7a1355b/">
                                 <i class="fa fa-linkedin-square" style="font-size:36px"></i>
-                             </a>
+                            </a>
                             
                         </p>
                         <p>The images used for training the model and the website originate from the WikiArt public database.
@@ -116,21 +109,11 @@
         </div>
         
         <!-- load JS files -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.1/min/dropzone.min.js"></script>
-        <script src="static/js/jquery-1.11.3.min.js"></script>         <!-- https://jquery.com/download/ -->
-        <script src="static/js/isotope.pkgd.min.js"></script>          <!-- https://isotope.metafizzy.co/ -->
-        <script src="static/js/imagesloaded.pkgd.min.js"></script>     <!-- https://imagesloaded.desandro.com/ --> 
-        <script src="static/js/jquery.magnific-popup.min.js"></script> <!-- http://dimsemenov.com/plugins/magnific-popup/ -->
+        <script src="static/js/jquery-1.11.3.min.js"></script>         
+        <script src="static/js/isotope.pkgd.min.js"></script>         
+        <script src="static/js/imagesloaded.pkgd.min.js"></script>     
+        <script src="static/js/jquery.magnific-popup.min.js"></script>
         <script src="static/js/parallax.min.js"></script>
-        <script>
-            function jump(h){
-                var url = location.href;               //Save down the URL without hash.
-                location.href = "#"+h;                 //Go to the target element.
-                history.replaceState(null,null,url);   //Don't like hashes. Changing it back.
-            }
-        
-            jump({{ anchor }});
-        </script>
         <script>     
             $(document).ready(function () {
                 // Isotope for Gallery
@@ -222,6 +205,15 @@
                 // Update the current year in copyright
                 $('.tm-current-year').text(new Date().getFullYear());          
             });
-    </script>   
+        </script> 
+        <script>
+            function jumpToHash(hash){
+                if (hash){
+                    var url = location.href;
+                    location.href = "#results";
+                }
+            }
+        jumpToHash({{ anchor }});
+        </script>
 </body>
 </html>
