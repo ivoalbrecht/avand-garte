@@ -27,18 +27,12 @@ def upload_file():
         file = request.files['file']
 
         if file.filename == '':
-            flash('No selected file')
             return render_template('index.html')
 
-        # if file and allowed_file(file.filename):
-        #     filename = secure_filename(file.filename)
-        #     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        prediction = predict_genre(file, 3, percentage=True)
 
-        prediction = predict_genre(file, 3)
-        print(prediction)
-
-        return render_template('index.html', picture_html = file, prediction_html = prediction)
-
+        return render_template('index.html', anchor="results", prediction_html = prediction)
+        
     return render_template('index.html')
 
 if __name__ == "__main__":

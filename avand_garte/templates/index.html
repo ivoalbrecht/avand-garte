@@ -11,9 +11,11 @@
     <link rel="stylesheet" href="static/font-awesome-4.7.0/css/font-awesome.min.css">                <!-- Font Awesome -->
     <link rel="stylesheet" href="static/css/bootstrap.min.css">                                      <!-- Bootstrap style -->
     <link rel="stylesheet" href="static/css/magnific-popup.css">                                     <!-- Magnific Popup -->
-    <link rel="stylesheet" href="static/css/templatemo-style.css">                                   <!-- Templatemo style -->
-    
-      </head>
+    <link rel="stylesheet" href="static/css/templatemo-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">  
+    <link rel="icon" type="image/png" href="static/img/favicon-32x32.png" sizes="32x32" />
+
+</head>
 
       <body>
         
@@ -40,7 +42,9 @@
                     <div class="tm-translucent-white-bg tm-content-box tm-content-box-right tm-textbox-full-height">
                         <div class="tm-content-box-inner">
                             <h2 class="tm-section-title tm-red-text">The tool</h2>
-                            <p>Upload your image from your pc with the button below. Accepted formats are .jpg and .png.</p>
+                            <p>Upload your image from your pc with the button below. Accepted formats are .jpg and .png.
+                                The prediction takes a while.
+                            </p>
                                 <div class="media tm-media" style="text-align: -webkit-center;">  
                                         <div class="media-body tm-media-body">
                                         <div class="col-md-6 mb-4">                                
@@ -64,65 +68,42 @@
                 </div>                
             </section>
             
-            <section class="parallax-window tm-section tm-section-gallery tm-flex" id="results" data-parallax="scroll" data-image-src="static/img/2616.jpg">
+            <section class="parallax-window tm-section tm-section-gallery tm-flex" id="results" data-parallax="scroll" data-image-src="static/img/6364.jpg">
                 <div class="tm-page-content-width tm-flex-col tm-gallery-content">
                     <div class="tm-content-box-inner">
-                        
-                        {% if prediction_html is sequence %}
+                                                
+                        <h2 class="tm-section-title">Your artwork has been classified as:</h2>
 
-                        <h2 class="tm-section-title">Your artworks is classified as:</h2>
+                            <div class="iso-box-section">
+                                <div class="iso-box-wrapper col4-iso-box">
+                                    {% for tuple in prediction_html %}
+                                    
+                                    <p>{{ tuple[0] }}: {{ tuple[1] }} %</p>
+                                    <button class="tm-btn" style="height:30px;width:{{ tuple[1] }}%" float="left"></button>
+                                    
+                                
+                                    {% endfor %}
+                                </div>                             
+                            </div>
 
-                        <!-- <div class="iso-section">
-                            <ul class="filter-wrapper clearfix">
-                                <li><a href="#" data-filter="*" class="selected opc-main-bg">Show All</a></li>
-                                <li><a href="#" class="opc-main-bg" data-filter=".design">Design</a></li>
-                                <li><a href="#" class="opc-main-bg" data-filter=".artwork">Artwork</a></li>
-                                <li><a href="#" class="opc-main-bg" data-filter=".website">Website</a></li>
-                            </ul>
-                        </div> -->
-                        <div class="iso-box-section">
-                            <div class="iso-box-wrapper col4-iso-box">
-                                <div class="iso-box design col-6 col-sm-4 col-md-4 col-lg-3 col-xl-3">
-                                    <img src={{ picture_html }} alt="Image" class="img-fluid">   
-                                </div>
-                                <p>{{prediction_html}}</p>
-                            </div>                             
-                        </div>
-
-                        {% endif %}
                     </div>
                 </div>                
             </section>
 
-            <!-- <section class="parallax-window tm-section tm-section-gallery tm-flex" id="results" data-parallax="scroll" data-image-src="static/img/2616.jpg">
-                <div class="tm-page-content-width tm-flex-col tm-gallery-content">
-                    <div class="tm-content-box-inner">
-                        <h2 class="tm-section-title">Multi-category gallery</h2>
-                            <div class="iso-section">
-                                <ul class="filter-wrapper clearfix">
-                                    <li><a href="#" data-filter="*" class="selected opc-main-bg">Show All</a></li>
-                                    <li><a href="#" class="opc-main-bg" data-filter=".design">Design</a></li>
-                                    <li><a href="#" class="opc-main-bg" data-filter=".artwork">Artwork</a></li>
-                                    <li><a href="#" class="opc-main-bg" data-filter=".website">Website</a></li>
-                                </ul>
-                            </div>
-                            <div class="iso-box-section">
-                                <div class="iso-box-wrapper col4-iso-box">
-                                    <div class="iso-box design col-6 col-sm-4 col-md-4 col-lg-3 col-xl-3">
-                                        <a href="static/img/gallery-img-01.jpg"><img src="static/img/gallery-img-01.jpg" alt="Image" class="img-fluid"></a>    
-                                    </div>
-                                </div>                             
-                            </div>
-                    </div>
-                </div>                
-            </section> -->
-
-            <!-- Contact -->
             <section class="parallax-window tm-section tm-section-contact" id="contact" data-parallax="scroll" data-image-src="static/img/2789.jpg">
                 <div class="tm-page-content-width">
                     <div class="tm-translucent-white-bg tm-textbox tm-content-box tm-textbox-full-height">
                         <h2 class="tm-section-title tm-red-text">About</h2>
-                        <p>This project has been </p>
+                        <p>This project has been carried out as a graduation project for the data science course of Spiced Academy.
+                            This project has been conducted by Ivo Albrecht. 
+                            <a href="https://www.linkedin.com/in/ivo-albrecht-b7a1355b/">
+                                <i class="fa fa-linkedin-square" style="font-size:36px"></i>
+                             </a>
+                            
+                        </p>
+                        <p>The images used for training the model and the website originate from the WikiArt public database.
+                            
+                        </p>
 
                     </div>
                 </div>
@@ -141,6 +122,15 @@
         <script src="static/js/imagesloaded.pkgd.min.js"></script>     <!-- https://imagesloaded.desandro.com/ --> 
         <script src="static/js/jquery.magnific-popup.min.js"></script> <!-- http://dimsemenov.com/plugins/magnific-popup/ -->
         <script src="static/js/parallax.min.js"></script>
+        <script>
+            function jump(h){
+                var url = location.href;               //Save down the URL without hash.
+                location.href = "#"+h;                 //Go to the target element.
+                history.replaceState(null,null,url);   //Don't like hashes. Changing it back.
+            }
+        
+            jump({{ anchor }});
+        </script>
         <script>     
             $(document).ready(function () {
                 // Isotope for Gallery
@@ -183,7 +173,7 @@
                         return false;
                     });
                 }
-
+                    
                 // Magnific Popup for Gallery
                 $('.iso-box-wrapper').magnificPopup({
                     delegate: 'a', // child items selector, by clicking on it popup will open

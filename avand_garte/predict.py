@@ -11,27 +11,39 @@ def match_genre(score):
     """
     This u
     """
-    decimals = 2
+    decimals = 0
     genre_dict = {}
+
     for i, j in zip(score, genres_list):
+
         genre_dict[j] = round(i,decimals)
+
     return genre_dict
 
-def predict_genre(file, num_pred: int):
+def predict_genre(file, num_pred: int, percentage: bool):
     """
     This 
     """
     model_path = "/Users/ivoalbrecht/projects/avand_garte/avand_garte/models/mobilenetV2"
-    picture_path = "/Users/ivoalbrecht/projects/avand_garte/avand_garte/avand_garte/uploads/schapen.jpeg"
     model = keras.models.load_model(model_path)
-    model.summary()
 
     pic = keras.preprocessing.image.load_img(file, target_size=(244,244))
+
     numpy_image = keras.preprocessing.image.img_to_array(pic)
+
     image_batch = np.expand_dims(numpy_image, axis=0)
+
     processed_image = keras.applications.mobilenet_v2.preprocess_input(image_batch)
+
     prediction = model.predict(processed_image).reshape(len(genres_list))
+
     prediction_list = prediction.tolist()
+
+    if percentage == True:
+        prediction_list = [element * 100 for element in prediction_list]
+
     results_dict = match_genre(prediction_list)
+
     sort_results = sorted(results_dict.items(), key=lambda x: x[1], reverse=True)
+
     return sort_results[:num_pred]
