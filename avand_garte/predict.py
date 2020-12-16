@@ -46,4 +46,11 @@ def predict_genre(file, num_pred: int, percentage: bool):
 
     sort_results = sorted(results_dict.items(), key=lambda x: x[1], reverse=True)
 
-    return sort_results[:num_pred]
+    score_list = []
+    genre_list = []
+
+    for item in sort_results[:num_pred]:
+        score_list.append(item[1])
+        genre_list.append(f'{item[0]}:{item[1]}%')
+
+    return score_list, genre_list

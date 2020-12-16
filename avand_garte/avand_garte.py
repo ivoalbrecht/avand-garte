@@ -7,11 +7,9 @@ from flask import Flask, flash, request, redirect, url_for, render_template
 from werkzeug.utils import secure_filename
 from predict import predict_genre, match_genre
 
-UPLOAD_FOLDER = '/Users/ivoalbrecht/projects/avand_garte/avand_garte/avand_garte/uploads'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -29,9 +27,9 @@ def upload_file():
         if file.filename == '':
             return render_template('index.html')
 
-        prediction = predict_genre(file, 3, percentage=True)
+        scores, genres = predict_genre(file, 5, percentage=True)
 
-        return render_template('index.html', anchor="results", prediction_html = prediction)
+        return render_template('index.html', scores_html = scores, genres_html = genres, anchor="results")
         
     return render_template('index.html')
 

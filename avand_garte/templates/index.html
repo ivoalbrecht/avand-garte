@@ -69,16 +69,32 @@
             </section>
             
             <section class="parallax-window tm-section tm-section-gallery tm-flex" id="results" data-parallax="scroll" data-image-src="static/img/6364.jpg">
+
+
+
+
+
                 <div class="tm-page-content-width tm-flex-col tm-gallery-content">
+                    
                     <div class="tm-content-box-inner">
+
+
                         <a href="#results">
                         </a>
-                        <h2 class="tm-section-title">Your artwork has been classified as:</h2>
-                        {% for tuple in prediction_html %}    
-                        <div class="row">                 
+
+                        <div class="card">
+                            <!-- <h2 class="tm-section-title">Your artwork has been classified as:</h2> -->
+                            <div class="card-body" style="height: 420px">
+                                <canvas id="chart-line" width="299" height="200" class="chartjs-render-monitor" style="display: block; width: 299px; height: 200px;"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- {% for tuple in prediction_html %}    
+                        <div class="grid-container">             
                             <p><button class="tm-btn" style="height:30px;width:{{ tuple[1] }}%" float="left">{{ tuple[0] }}:{{ tuple[1] }} %</button></p>
                         </div> 
-                        {% endfor %}
+
+                        {% endfor %} -->
                     </div>
                 </div>                
             </section>
@@ -214,6 +230,40 @@
                 }
             }
         jumpToHash({{ anchor }});
+        </script>
+
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
+
+        <script>
+            var genres  = {{ genres_html | safe }}
+            var scores = {{ scores_html | safe }}
+        </script>
+
+        <script>
+            $(document).ready(function() {
+                var ctx = $("#chart-line");
+                var myLineChart = new Chart(ctx, {
+                    type: 'radar',
+                    data: {
+                        labels: genres,
+                        datasets: [{
+                            data: scores,
+                            label: "Art Genre (%)",
+                            borderColor: "#983333",
+                            backgroundColor: '#983333',
+                            fill: false
+                        }]
+                    },
+                    radarOptions: {
+                        scale: {
+                            pointLabels: {
+                                fontSize: 50
+                            }
+                        }
+                    }
+                });
+
+            });
         </script>
 </body>
 </html>
